@@ -1,4 +1,5 @@
 import face_recognition
+import json
 
 
 def get_face_locations(image):
@@ -14,3 +15,11 @@ def compare_faces(known_encoding, unknown_encoding):
         [known_encoding],
         unknown_encoding
     )[0]
+
+
+def encoding_to_string(encoding):
+    return json.dumps(encoding.tolist())
+
+
+def string_to_encoding(text):
+    return json.loads(text)
