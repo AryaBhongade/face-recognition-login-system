@@ -18,3 +18,23 @@ def save_user(username, face_encoding):
 
     connection.commit()
     connection.close()
+
+
+def get_all_users():
+
+    connection = sqlite3.connect("database/users.db")
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        SELECT username, face_encoding
+        FROM users
+        """
+    )
+
+    users = cursor.fetchall()
+
+    connection.close()
+
+    return users
