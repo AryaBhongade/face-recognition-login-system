@@ -7,63 +7,63 @@ from face_module.face_utils import (
 import cv2
 import face_recognition
 
-camera = cv2.VideoCapture(0)
 
-while True:
+def authenticate_face():
 
-    success, frame = camera.read()
+    camera = cv2.VideoCapture(0)
 
-    if not success:
-        break
+    while True:
 
-    cv2.imshow("Face Login", frame)
+        success, frame = camera.read()
 
-    key = cv2.waitKey(1)
+        if not success:
+            break
 
-    if key == ord("c"):
+        cv2.imshow("Face Login", frame)
 
-        face_locations = face_recognition.face_locations(frame)
+        key = cv2.waitKey(1)
 
-        if len(face_locations) == 0:
-            print("No face detected.")
-            continue
+        if key == ord("c"):
 
-        face_encodings = face_recognition.face_encodings(
-            frame,
-            face_locations
-        )
+            face_locations = face_recognition.face_locations(frame)
 
-        login_encoding = face_encodings[0]
+            if len(face_locations) == 0:
+                print("No face detected.")
+                continue
 
-        users = get_all_users()
-
-        match_found = False
-
-        for username, stored_encoding in users:
-
-            stored_encoding = string_to_encoding(
-                stored_encoding
+            face_encodings = face_recognition.face_encodings(
+                frame,
+                face_locations
             )
 
-            if compare_faces(
-                stored_encoding,
-                login_encoding
-            ):
+            login_encoding = face_encodings[0]
 
-                print(
-                    f"Login successful. Welcome {username}"
+            users = get_all_users()
+
+            for username, stored_encoding in users:
+
+                stored_encoding = string_to_encoding(
+                    stored_encoding
                 )
 
-                match_found = True
-                break
+                if compare_faces(
+                    stored_encoding,
+                    login_encoding
+                ):
 
-        if not match_found:
-            print("Face not recognized.")
+                    camera.release()
+                    cv2.destroyAllWindows()
 
-        break
+                    return username
 
-    elif key == ord("q"):
-        break
+            camera.release()
+            cv2.destroyAllWindows()
 
-camera.release()
-cv2.destroyAllWindows()
+            return None
+
+        elif key == ord("q"):
+
+            camera.release()
+            cv2.destroyAllWindows()
+
+            return None

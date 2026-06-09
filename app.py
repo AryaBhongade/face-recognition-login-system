@@ -5,6 +5,7 @@ from flask import (
     redirect,
     url_for
 )
+from face_module.login_face import authenticate_face
 
 app = Flask(__name__)
 app.secret_key = "face_login_secret_key"
@@ -51,6 +52,23 @@ def logout():
     session.pop("user", None)
 
     return redirect(url_for("home"))
+
+@app.route("/face-login", methods=["POST"])
+def face_login():
+
+    username = authenticate_face()
+
+    if username:
+
+        session["user"] = username
+
+        return redirect(
+            url_for("dashboard")
+        )
+
+    return redirect(
+        url_for("login")
+    )
 
 
 if __name__ == "__main__":
