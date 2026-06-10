@@ -1,29 +1,55 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
     <title>Login</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
 </head>
+
 <body>
 
-<h1>Face Login</h1>
+    <div class="card">
 
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for message in messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
+        <h1>Face Login</h1>
 
-<p>Login using face recognition.</p>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 
-<form action="/face-login" method="post">
-    <button type="submit">
-        Login With Face
-    </button>
-</form>
+        <p>
+            Click Login and then press
+            <strong>C</strong>
+            in the webcam window to authenticate.
+        </p>
 
-<a href="/">Home</a>
+        <br>
+
+        <form action="/face-login" method="post">
+
+            <button type="submit">
+                Login With Face
+            </button>
+
+        </form>
+
+        <br>
+
+        <a href="/">
+            Home
+        </a>
+
+    </div>
 
 </body>
+
 </html>

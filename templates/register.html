@@ -1,40 +1,63 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
     <title>Register</title>
-</head>
-<body>
 
-<h1>Face Registration</h1>
-
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for message in messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
-
-<form action="/face-register" method="post">
-
-    <label>Username:</label>
-    <input
-        type="text"
-        name="username"
-        required
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
     >
 
-    <br><br>
+</head>
 
-    <button type="submit">
-        Register With Face
-    </button>
+<body>
 
-</form>
+    <div class="card">
 
-<br>
+        <h1>Register New User</h1>
 
-<a href="/">Home</a>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="/face-register" method="post">
+
+            <p>Username</p>
+
+            <input
+                type="text"
+                name="username"
+                required
+            >
+
+            <p>
+                Click Register and then press
+                <strong>C</strong>
+                in the webcam window.
+            </p>
+
+            <br>
+
+            <button type="submit">
+                Register With Face
+            </button>
+
+        </form>
+
+        <br>
+
+        <a href="/">
+            Home
+        </a>
+
+    </div>
 
 </body>
+
 </html>
