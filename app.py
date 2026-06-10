@@ -4,7 +4,8 @@ from flask import (
     session,
     redirect,
     url_for,
-    request
+    request,
+    flash
 )
 
 from face_module.login_face import authenticate_face
@@ -31,9 +32,16 @@ def face_register():
     success = register_face(username)
 
     if success:
+
+        flash("Registration successful.")
+
+        session["user"] = username
+
         return redirect(
-            url_for("login")
+            url_for("dashboard")
         )
+
+    flash("Username already exists.")
 
     return redirect(
         url_for("register")
@@ -70,11 +78,15 @@ def face_login():
 
     if username:
 
+        flash("Login successful.")
+
         session["user"] = username
 
         return redirect(
             url_for("dashboard")
         )
+
+    flash("Face not recognized.")
 
     return redirect(
         url_for("login")
