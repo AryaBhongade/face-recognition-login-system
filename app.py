@@ -56,15 +56,6 @@ def dashboard():
         username=session["user"]
     )
 
-
-@app.route("/test-login")
-def test_login():
-
-    session["user"] = "Arya"
-
-    return redirect(url_for("dashboard"))
-
-
 @app.route("/logout")
 def logout():
 

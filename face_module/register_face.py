@@ -1,11 +1,23 @@
-from database.db_operations import save_user
-from face_module.face_utils import encoding_to_string
+from database.db_operations import (
+    save_user,
+    username_exists
+)
+
+from face_module.face_utils import (
+    encoding_to_string
+)
 
 import cv2
 import face_recognition
 
 
 def register_face(username):
+
+    if username_exists(username):
+
+        print("Username already exists.")
+
+        return False
 
     camera = cv2.VideoCapture(0)
 

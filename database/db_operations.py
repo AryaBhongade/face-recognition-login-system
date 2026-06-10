@@ -38,3 +38,25 @@ def get_all_users():
     connection.close()
 
     return users
+
+
+def username_exists(username):
+
+    connection = sqlite3.connect("database/users.db")
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        SELECT *
+        FROM users
+        WHERE username = ?
+        """,
+        (username,)
+    )
+
+    user = cursor.fetchone()
+
+    connection.close()
+
+    return user is not None
