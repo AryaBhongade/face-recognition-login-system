@@ -3,9 +3,12 @@ from flask import (
     render_template,
     session,
     redirect,
-    url_for
+    url_for,
+    request
 )
+
 from face_module.login_face import authenticate_face
+from face_module.register_face import register_face
 
 app = Flask(__name__)
 app.secret_key = "face_login_secret_key"
@@ -19,6 +22,22 @@ def home():
 @app.route("/register")
 def register():
     return render_template("register.html")
+
+@app.route("/face-register", methods=["POST"])
+def face_register():
+
+    username = request.form["username"]
+
+    success = register_face(username)
+
+    if success:
+        return redirect(
+            url_for("login")
+        )
+
+    return redirect(
+        url_for("register")
+    )
 
 
 @app.route("/login")

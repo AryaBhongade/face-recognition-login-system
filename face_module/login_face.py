@@ -25,14 +25,28 @@ def authenticate_face():
 
         if key == ord("c"):
 
-            face_locations = face_recognition.face_locations(frame)
+            small_frame = cv2.resize(
+                frame,
+                (0, 0),
+                fx=0.25,
+                fy=0.25
+            )
+
+            rgb_small_frame = cv2.cvtColor(
+                small_frame,
+                cv2.COLOR_BGR2RGB
+            )
+
+            face_locations = face_recognition.face_locations(
+                rgb_small_frame
+            )
 
             if len(face_locations) == 0:
                 print("No face detected.")
                 continue
 
             face_encodings = face_recognition.face_encodings(
-                frame,
+                rgb_small_frame,
                 face_locations
             )
 
@@ -67,3 +81,4 @@ def authenticate_face():
             cv2.destroyAllWindows()
 
             return None
+        

@@ -4,52 +4,68 @@ from face_module.face_utils import encoding_to_string
 import cv2
 import face_recognition
 
-username = input("Enter username: ")
 
-camera = cv2.VideoCapture(0)
+def register_face(username):
 
-while True:
-    success, frame = camera.read()
+    camera = cv2.VideoCapture(0)
 
-    if not success:
-        print("Could not access webcam.")
-        break
+    while True:
 
-    cv2.imshow("Face Registration", frame)
+        success, frame = camera.read()
 
-    key = cv2.waitKey(1)
+        if not success:
+            break
 
-    if key == ord("c"):
+        cv2.imshow("Face Registration", frame)
 
-        face_locations = face_recognition.face_locations(frame)
+        key = cv2.waitKey(1)
 
-        if len(face_locations) == 0:
-            print("No face detected.")
-            continue
+        if key == ord("c"):
 
-        face_encodings = face_recognition.face_encodings(
-            frame,
-            face_locations
-        )
+            small_frame = cv2.resize(
+                frame,
+                (0, 0),
+                fx=0.25,
+                fy=0.25
+            )
 
-        encoding = face_encodings[0]
+            rgb_small_frame = cv2.cvtColor(
+                small_frame,
+                cv2.COLOR_BGR2RGB
+            )
 
-        print("Face encoding generated successfully.")
-        print(f"Encoding length: {len(encoding)}")
+            face_locations = face_recognition.face_locations(
+                rgb_small_frame
+            )
 
-        encoding_string = encoding_to_string(encoding)
+            if len(face_locations) == 0:
+                print("No face detected.")
+                continue
 
-        save_user(
-            username,
-            encoding_string
-        )
+            face_encodings = face_recognition.face_encodings(
+                rgb_small_frame,
+                face_locations
+            )
 
-        print("User registered successfully.")
+            encoding = face_encodings[0]
 
-        break
+            encoding_string = encoding_to_string(
+                encoding
+            )
 
-    elif key == ord("q"):
-        break
+            save_user(
+                username,
+                encoding_string
+            )
 
-camera.release()
-cv2.destroyAllWindows()
+            camera.release()
+            cv2.destroyAllWindows()
+
+            return True
+
+        elif key == ord("q"):
+
+            camera.release()
+            cv2.destroyAllWindows()
+
+            return False
