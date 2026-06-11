@@ -19,31 +19,60 @@
         <h1>Dashboard</h1>
 
         <p>
-    Welcome
-    <span class="username">
-        {{ username }}
-    </span>
-</p>
-
-<div class="divider"></div>
-
-        <br>
-
-        <p>
-            Face Recognition Authentication
-            Successful.
+            Welcome
+            <span class="username">
+                {{ username }}
+            </span>
         </p>
 
-        <p>
-            You are securely logged in.
-        </p>
+        <div class="divider"></div>
 
-        <br>
+        <div class="dashboard-grid">
+
+            <div class="info-card">
+
+                <h3>
+                    🔐 Authentication Status
+                </h3>
+
+                <p>
+                    Authenticated
+                </p>
+
+            </div>
+
+            <div class="info-card">
+
+                <h3>
+                    📸 Login Method
+                </h3>
+
+                <p>
+                    Face Recognition
+                </p>
+
+            </div>
+
+            <div class="info-card">
+
+                <h3>
+                    🟢 Session Status
+                </h3>
+
+                <p>
+                    Active
+                </p>
+
+            </div>
+
+        </div>
 
         <a href="/logout">
+
             <button>
                 Logout
             </button>
+
         </a>
 
     </div>

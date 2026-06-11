@@ -32,17 +32,12 @@ def face_register():
     success = register_face(username)
 
     if success:
-
-        flash("✅ Registration successful.")
-
         session["user"] = username
-
         return redirect(
             url_for("dashboard")
         )
 
     flash("❌ Username already exists.")
-
     return redirect(
         url_for("register")
     )
@@ -78,13 +73,11 @@ def face_login():
 
     if username:
 
-        flash("✅ Login successful.")
-
         session["user"] = username
 
         return redirect(
-            url_for("dashboard")
-        )
+        url_for("dashboard")
+    )
 
     flash("❌ Face not recognized.")
 

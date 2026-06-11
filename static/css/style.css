@@ -144,3 +144,34 @@ a {
 
     text-align: center;
 }
+
+.dashboard-grid {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+    margin: 25px 0;
+}
+
+.info-card {
+
+    background: rgba(110, 25, 189, 0.12);
+
+    border: 1px solid rgba(160, 70, 212, 0.25);
+
+    border-radius: 12px;
+
+    padding: 15px;
+}
+
+.info-card h3 {
+
+    color: var(--heading-color);
+
+    margin-bottom: 8px;
+
+    font-size: 18px;
+}
