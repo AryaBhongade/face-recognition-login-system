@@ -122,3 +122,25 @@ a {
 
     border-top: 1px solid rgba(160, 70, 212, 0.25);
 }
+
+.flash-message {
+
+    width: 80%;
+
+    margin: 15px auto;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    background: rgba(110, 25, 189, 0.22);
+
+    border: 1px solid rgba(160, 70, 212, 0.40);
+
+    box-shadow:
+        0 0 8px rgba(110, 25, 189, 0.15);
+
+    color: var(--text-color);
+
+    text-align: center;
+}
