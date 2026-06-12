@@ -6,7 +6,7 @@ __pycache__/
 *.pyc
 
 # Database Files
-database/*.db
+*.db
 
 # Captured Face Images
 captured_faces/
